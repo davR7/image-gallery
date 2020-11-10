@@ -1,4 +1,9 @@
 # image-gallery
+Image gallery with filter using VueJS.
+
+## Dependencies
+animate.css
+bootstrap-vue
 
 ## Project setup
 ```
