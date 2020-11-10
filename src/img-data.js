@@ -75,9 +75,9 @@ export default [{
         image: "watch3.jpg"
     }, {
         id: 16,
-        name: 'smart-tv2',
+        name: 'smart-tv4',
         category: 'smart-tv',
-        image: "smart-tv2.jpg"
+        image: "smart-tv4.jpg"
     }, {
         id: 17,
         name: 'headphone4',
