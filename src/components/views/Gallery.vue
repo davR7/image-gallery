@@ -3,44 +3,50 @@
     <b-container>
       <h2>Galeria de Imagem</h2>
       <hr />
-      <div class="menu">
-        <b-button class="btn m-1" @click="filterGallery('all')">Todas Imagens</b-button>
-        <b-button class="btn m-1" @click="filterGallery('smart-tv')">Smart TV</b-button>
-        <b-button class="btn m-1" @click="filterGallery('notebook')">Notebook</b-button>
-        <b-button class="btn m-1" @click="filterGallery('mobile')">SmartFone</b-button>
-        <b-button class="btn m-1" @click="filterGallery('headphone')">Fone de Ouvido</b-button>
-        <b-button class="btn m-1" @click="filterGallery('watch')">Relógio</b-button>
-      </div>
+      <Menu @selectedCategory="filterGallery($event)"/>
       <div class="images">
-        <div class="row">
-          <ImgBox v-for="image in imgData" :key="image.id" :image="image" />
-        </div>
+        <transition-group 
+          class="row"
+          tag="div"
+          appear
+          enter-active-class="animate__animated animate__zoomIn"
+        >
+          <ImgBox v-for="image in imgData" :key="image.id" 
+            :image="image" :opt="opt" />
+        </transition-group>
       </div>
     </b-container>
   </div>
 </template>
 
 <script>
+import Menu from '../widgets/Menu.vue'
 import ImgBox from "../widgets/ImgBox.vue";
 import imgData from "@/img-data.js";
-import $ from "jquery";
 
 export default {
-  components: { ImgBox },
+  components: { Menu, ImgBox },
   data() {
     return {
-      imgData: imgData,
+      imgData,
+      opt: {
+        all: true,
+        enable: ""
+      }
     };
   },
   methods: {
     filterGallery(category) {
-      if (category == "all") {
-        $(".img-box").show("1000")
+      if (category == 'all') {
+        this.opt.all = true;
       } else {
-        $(".img-box").not("."+category).hide('1000')
-        $(".img-box").filter("."+category).show('1000')
+        this.opt.all = false;
+        this.opt.enable = '';
+        setTimeout(()=> {
+          this.opt.enable = category
+        }, 100)
       }
-    }
+    },
   }
 }
 </script>
@@ -49,9 +55,14 @@ export default {
 .gallery h2 {
   font-size: 2.2rem;
   text-transform: uppercase;
+  font-weight: bolder;
 }
 
 .images {
   margin-top: 30px;
+}
+
+.images .row {
+  height: 100vh;
 }
 </style>
