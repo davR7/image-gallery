@@ -28,4 +28,8 @@ export default {
 </script>
 
 <style>
+.menu .btn {
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);
+  border: 1px solid #FFF;
+}
 </style>

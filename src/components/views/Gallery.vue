@@ -5,10 +5,7 @@
       <hr />
       <Menu @selectedCategory="filterGallery($event)"/>
       <div class="images">
-        <transition-group 
-          class="row"
-          tag="div"
-          appear
+        <transition-group class="row" tag="div" appear
           enter-active-class="animate__animated animate__zoomIn"
         >
           <ImgBox v-for="image in imgData" :key="image.id" 
@@ -55,7 +52,8 @@ export default {
 .gallery h2 {
   font-size: 2.2rem;
   text-transform: uppercase;
-  font-weight: bolder;
+  font-weight: 700;
+  color: #FFF;
 }
 
 .images {

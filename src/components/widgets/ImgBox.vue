@@ -16,7 +16,7 @@ export default {
 
 <style>
 .img-box img {
-  background-color: #ccc;
+  background-color: #AFE669;
   padding: 4px;
   margin-bottom: 30px;
 }
