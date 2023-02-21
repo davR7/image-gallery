@@ -1,25 +1,19 @@
 <template>
   <div class="gallery">
-    <b-container>
-      <h2>Galeria de Imagens</h2>
-      <hr />
-      <Menu @selectedCategory="filterGallery($event)" />
-      <div class="images">
-        <transition-group class="row" tag="div" appear
-          enter-active-class="animate__animated animate__zoomIn"
-        >
-          <ImgBox v-for="image in imgData" :key="image.id" 
-            :image="image" :opt="opt" />
-        </transition-group>
-      </div>
-    </b-container>
+    <Menu @selectedCategory="filterGallery($event)" />
+    <transition-group class="gallery__images" tag="div" appear
+      enter-active-class="animate__animated animate__zoomIn"
+      >
+      <ImgBox v-for="image in imgData" :key="image.id" 
+        :image="image" :opt="opt" />
+    </transition-group>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import Menu from '../widgets/Menu.vue'
-import ImgBox from "../widgets/ImgBox.vue";
+import Menu from '../components/Menu.vue'
+import ImgBox from "../components/ImgBox.vue";
 import imgData from "@/img-data.js";
 
 export default {
@@ -50,7 +44,7 @@ export default {
     },
     generatePokemons(){
       Promise.all(this.generatePokemonsPromises(150))
-        .then((res) => this.pokemons = res)
+        .then((res) => /* this.pokemons = res */ console.log(res))
     },
     filterGallery(category) {
       if (category == 'all') {
@@ -71,18 +65,11 @@ export default {
 </script>
 
 <style scoped>
-.gallery h2 {
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #FFF;
-}
-
-.images {
-  margin-top: 30px;
-}
-
-.images .row {
-  height: 100vh;
+.gallery__images {
+  display: grid;
+  grid-template-columns: 
+    repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: auto;
+  gap: 20px;
 }
 </style>

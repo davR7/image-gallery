@@ -1,8 +1,8 @@
 <template>
   <div class="menu">
-    <b-button v-for="(categ, index) in categs" :key="index" 
+    <button v-for="(categ, index) in categs" :key="index" 
       class="btn m-1" @click="categoryName(`${categ.class}`)"
-    >{{ categ.name }}</b-button>
+    >{{ categ.name }}</button>
   </div>
 </template>
 
@@ -28,7 +28,16 @@ export default {
 </script>
 
 <style>
+.menu {
+  margin-bottom: 20px;
+}
+
 .menu .btn {
+  background-color: #4169E1;
+  color: #fff;
+  padding: 10px 15px;
+  margin-right: 5px;
+  border-radius: 10px;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);
   border: 1px solid #FFF;
 }
