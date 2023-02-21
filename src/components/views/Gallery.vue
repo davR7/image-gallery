@@ -1,9 +1,9 @@
 <template>
   <div class="gallery">
     <b-container>
-      <h2>Galeria de Imagem</h2>
+      <h2>Galeria de Imagens</h2>
       <hr />
-      <Menu @selectedCategory="filterGallery($event)"/>
+      <Menu @selectedCategory="filterGallery($event)" />
       <div class="images">
         <transition-group class="row" tag="div" appear
           enter-active-class="animate__animated animate__zoomIn"
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Menu from '../widgets/Menu.vue'
 import ImgBox from "../widgets/ImgBox.vue";
 import imgData from "@/img-data.js";
@@ -26,6 +27,7 @@ export default {
   data() {
     return {
       imgData,
+      pokemons: [],
       opt: {
         all: true,
         enable: ""
@@ -33,6 +35,23 @@ export default {
     };
   },
   methods: {
+    async fetchPokemon(id){
+      try {
+        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        return res;
+      } catch (e) {
+        return e;
+      }
+    },
+    generatePokemonsPromises(amount){
+      return Array(amount).fill().map((_, index) => {
+        return this.fetchPokemon(index + 1);
+      })
+    },
+    generatePokemons(){
+      Promise.all(this.generatePokemonsPromises(150))
+        .then((res) => this.pokemons = res)
+    },
     filterGallery(category) {
       if (category == 'all') {
         this.opt.all = true;
@@ -44,6 +63,9 @@ export default {
         }, 100)
       }
     },
+  },
+  created() {
+    this.generatePokemons()
   }
 }
 </script>
