@@ -1,44 +1,52 @@
 <template>
   <div class="menu">
-    <button v-for="(categ, index) in categs" :key="index" 
-      class="btn m-1" @click="categoryName(`${categ.class}`)"
-    >{{ categ.name }}</button>
+    <select
+      class="menu__select"
+      v-model="selected" 
+      @change="categoryName(selected.class)"
+    >
+      <option 
+        class="select__opt" 
+        v-for="item in typesPokemons"
+        :key="item.id" 
+        :value="item"
+      >
+        {{ item.name }}
+      </option>
+    </select>
   </div>
 </template>
 
 <script>
+import typesPokemons from '../typePokemons';
+
 export default {
-  data(){
+  data() {
     return {
-      categs: [
-        { name: 'SmartTV', class: 'smart-tv' },
-        { name: 'Notebook', class: 'notebook' },
-        { name: 'SmartFone', class: 'mobile' },
-        { name: 'Fone de Ouvido', class: 'headphone' },
-        { name: 'Todas Imagens', class: 'all' },
-      ]
+      typesPokemons,
+      selected: 16
     }
   },
   methods: {
-    categoryName(name){
+    categoryName(name) {
       this.$emit('selectedCategory', name)
     }
+  },
+  created() {
+    this.selected = this.typesPokemons.find(item => item.id === this.selected);
   }
 };
 </script>
 
 <style>
 .menu {
-  margin-bottom: 20px;
+  width: 300px;
 }
 
-.menu .btn {
-  background-color: #4169E1;
-  color: #fff;
-  padding: 10px 15px;
-  margin-right: 5px;
-  border-radius: 10px;
-  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);
-  border: 1px solid #FFF;
+.menu__select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 30px;
+  background-color: #1E90FF;
 }
 </style>
