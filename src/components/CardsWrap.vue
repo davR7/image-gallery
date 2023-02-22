@@ -1,26 +1,24 @@
 <template>
-  <div class="gallery">
+  <div class="cards-wrap">
     <Menu @selectedCategory="filterGallery($event)" />
-    <transition-group class="gallery__images" tag="div" appear
+    <transition-group class="cards-wrap__images" tag="div" appear
       enter-active-class="animate__animated animate__zoomIn"
       >
-      <ImgBox v-for="image in imgData" :key="image.id" 
-        :image="image" :opt="opt" />
+      <Card v-for="{data: pokemon} in pokemons" :key="pokemon.id" 
+        :pokemon="pokemon" :opt="opt" />
     </transition-group>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import Menu from '../components/Menu.vue'
-import ImgBox from "../components/ImgBox.vue";
-import imgData from "@/img-data.js";
+import Menu from './Menu.vue'
+import Card from "./Card.vue";
 
 export default {
-  components: { Menu, ImgBox },
+  components: { Menu, Card },
   data() {
     return {
-      imgData,
       pokemons: [],
       opt: {
         all: true,
@@ -44,7 +42,7 @@ export default {
     },
     generatePokemons(){
       Promise.all(this.generatePokemonsPromises(150))
-        .then((res) => /* this.pokemons = res */ console.log(res))
+        .then((res) => this.pokemons = res)
     },
     filterGallery(category) {
       if (category == 'all') {
@@ -65,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-.gallery__images {
+.cards-wrap__images {
   display: grid;
   grid-template-columns: 
     repeat(auto-fill, minmax(300px, 1fr));
