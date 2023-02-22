@@ -1,7 +1,8 @@
 <template>
   <div class="cards-wrap">
     <Menu @selectedCategory="filterGallery($event)" />
-    <transition-group class="cards-wrap__images" tag="div" appear
+    <Loading v-if="loadingPokemons"/>
+    <transition-group v-else class="cards-wrap__images" tag="div" appear
       enter-active-class="animate__animated animate__zoomIn"
       >
       <Card v-for="{data: pokemon} in pokemons" :key="pokemon.id" 
@@ -12,14 +13,16 @@
 
 <script>
 import axios from 'axios';
-import Menu from './Menu.vue'
 import Card from "./Card.vue";
+import Loading from './Loading.vue'
+import Menu from './Menu.vue'
 
 export default {
-  components: { Menu, Card },
+  components: { Card, Loading, Menu },
   data() {
     return {
       pokemons: [],
+      loadingPokemons: true,
       opt: {
         all: true,
         enable: ""
@@ -43,6 +46,7 @@ export default {
     generatePokemons(){
       Promise.all(this.generatePokemonsPromises(150))
         .then((res) => this.pokemons = res)
+        .finally(() => this.loadingPokemons = false)
     },
     filterGallery(category) {
       if (category == 'all') {
