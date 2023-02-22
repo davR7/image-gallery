@@ -1,15 +1,22 @@
 <template>
   <div id="app">
-    <ViewGallery />
+    <div class="wrap space">
+      <ViewGallery />
+    </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from './components/Footer.vue';
 import ViewGallery from './views/ViewGallery.vue';
 
 export default {
     name: "App",
-    components: { ViewGallery }
+    components: { 
+      Footer, 
+      ViewGallery 
+    }
 }
 </script>
 
@@ -39,12 +46,16 @@ background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, F
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrap {
   padding: 0 20px;
 }
 
-.app-title {
-  color: #fff;
-  font-size: 2rem;
-  margin: 30px;
-  text-align: center;
-}</style>
+.space {
+  flex: 1 0;
+}
+</style>
