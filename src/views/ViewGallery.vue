@@ -9,7 +9,7 @@
 import CardsWrap from '../components/CardsWrap.vue';
 
 export default {
-    components: { CardsWrap }
+    components: { CardsWrap, }
 };
 </script>
 
