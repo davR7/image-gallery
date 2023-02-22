@@ -22,7 +22,7 @@ export default {
       })
     },
     generatePokemons(){
-      Promise.all(this.generatePokemonsPromises(150))
+      Promise.all(this.generatePokemonsPromises(151))
         .then((res) => this.pokemons = res)
         .finally(() => this.loadingPokemons = false)
     },
