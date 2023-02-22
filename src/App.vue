@@ -1,16 +1,15 @@
 <template>
   <div id="app">
-    <h2 class="app-title">Os 150 Pokémons</h2>
-    <Gallery />
+    <ViewGallery />
   </div>
 </template>
 
 <script>
-import Gallery from './views/Gallery.vue'
+import ViewGallery from './views/ViewGallery.vue';
 
 export default {
-  name: 'App',
-  components: { Gallery }
+    name: "App",
+    components: { ViewGallery }
 }
 </script>
 
@@ -34,7 +33,6 @@ body {
   background: #232526;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 }
 
 #app {
@@ -42,7 +40,6 @@ background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, F
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0 20px;
-  margin-top: 60px;
 }
 
 .app-title {
