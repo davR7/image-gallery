@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <p class="footer__text">Image Gallery &copy; 2020-2023</p>
+    <p class="footer__text">ImageGallery &copy; 2020-2023</p>
   </div>
 </template>
 
