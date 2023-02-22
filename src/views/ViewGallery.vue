@@ -1,6 +1,6 @@
 <template>
   <div class="view-gallery">
-    <h2 class="view-gallery__title">Os 150 Pokémons</h2>
+    <h2 class="view-gallery__title">Os 151 Pokémons</h2>
     <CardsWrap />
   </div>
 </template>
