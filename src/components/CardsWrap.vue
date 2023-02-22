@@ -12,17 +12,16 @@
 </template>
 
 <script>
-import axios from 'axios';
+import mixinPokemons from '../mixinPokemons';
 import Card from "./Card.vue";
 import Loading from './Loading.vue'
 import Menu from './Menu.vue'
 
 export default {
   components: { Card, Loading, Menu },
+  mixins: [ mixinPokemons ],
   data() {
     return {
-      pokemons: [],
-      loadingPokemons: true,
       opt: {
         all: true,
         enable: ""
@@ -30,24 +29,6 @@ export default {
     };
   },
   methods: {
-    async fetchPokemon(id){
-      try {
-        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        return res;
-      } catch (e) {
-        return e;
-      }
-    },
-    generatePokemonsPromises(amount){
-      return Array(amount).fill().map((_, index) => {
-        return this.fetchPokemon(index + 1);
-      })
-    },
-    generatePokemons(){
-      Promise.all(this.generatePokemonsPromises(150))
-        .then((res) => this.pokemons = res)
-        .finally(() => this.loadingPokemons = false)
-    },
     filterGallery(category) {
       if (category == 'all') {
         this.opt.all = true;
@@ -59,9 +40,6 @@ export default {
         }, 100)
       }
     },
-  },
-  created() {
-    this.generatePokemons()
   }
 }
 </script>
